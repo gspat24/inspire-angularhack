@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase'
 
 // Services
 import { FirebaseService } from '../app/services/firebase.service'
@@ -29,5 +30,14 @@ export class AppComponent implements OnInit {
     // this.fbServ.setReport(item).then((result) => {
     //   console.log('RESULT: ', result)
     // })
+
+    // GENERATE AND REGISTER TOKEN
+    const fcm = firebase.messaging();
+    await fcm.requestPermission();
+    const token = await fcm.getToken();
+    console.log(token);
+    this.fbServ.setToken(token).then((result) => {
+      console.log('TOKEN SET: ', result)
+    })
   }
 }
