@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,9 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   user = {
     username: '',
@@ -33,9 +36,13 @@ export class LoginComponent implements OnInit {
       (<any>Object).values(this.loginForm.controls).forEach(control => {
         control.markAsTouched();
       });
-
-      return console.log("DONT CALL SERVICE")
     }
-    console.log("CALL SERVICE")
+
+
+    if (f.value.username === 'user' && f.value.password === 'user') {
+      this.router.navigate(['/user'])
+    } else if (f.value.username === 'police' && f.value.password === 'police') {
+      this.router.navigate(['/police'])
+    }
   }
 }
