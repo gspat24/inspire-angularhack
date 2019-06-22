@@ -39,6 +39,7 @@ export class FormComponent implements OnInit {
       (<any>Object).values(this.reportForm.controls).forEach(control => {
         control.markAsTouched();
       });
+      return;
     }
 
     const item = {
