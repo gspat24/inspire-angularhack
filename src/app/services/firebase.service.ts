@@ -5,14 +5,19 @@ import { Observable } from 'rxjs';
     
 @Injectable({
   providedIn: 'root'
-})  
+})
+ 
 export class FirebaseService {
 
-constructor(private afs: AngularFirestore) {
-}
-     
-  getReports(): Observable<any>{
+  constructor(private afs: AngularFirestore) { }     
+    
+  getReports(): Observable < any > {
     const reportsCollection = this.afs.collection('reports');
     return reportsCollection.valueChanges();
+  }
+
+  async setReport(item): Promise<any>{
+    const reportsCollection = this.afs.collection('reports');
+    return await reportsCollection.add(item);
   }
 }
