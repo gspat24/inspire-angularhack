@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Services
@@ -9,16 +9,18 @@ import { FirebaseService } from '../app/services/firebase.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnChanges {
   title = 'inspire-angularhack';
   role;
 
   constructor(private fbServ: FirebaseService, private router: Router) {
-    this.role = localStorage.getItem("role");
   }
 
   async ngOnInit() {
     console.log('ONINIT')
+    this.role = localStorage.getItem("role");
+
+
     if (!this.role) {
       this.router.navigate(['/'])
     }
@@ -38,7 +40,12 @@ export class AppComponent implements OnInit {
     // })
   }
 
+  ngOnChanges(changes) {
+    console.log(changes)
+  }
+
   logout() {
+    this.role = "";
     localStorage.removeItem('role');
     this.router.navigate(['/'])
   }
