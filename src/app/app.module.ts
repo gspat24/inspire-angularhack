@@ -3,6 +3,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,10 +26,14 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireDatabaseModule,
     MDBBootstrapModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [],
+  providers: [
+    AngularFirestore,
+    AngularFireDatabase
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
