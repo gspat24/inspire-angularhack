@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: '',
     component: LoginComponent
+  },
+  {
+    path: 'user',
+    loadChildren: './user/user.module#UserModule'
+  },
+  {
+    path: 'police',
+    loadChildren: './police/police.module#PoliceModule'
   }
 ];
 
