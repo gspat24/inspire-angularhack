@@ -12,7 +12,7 @@ export class FirebaseService {
   constructor(private afs: AngularFirestore) { }     
     
   getReports(): Observable < any > {
-    const reportsCollection = this.afs.collection('reports');
+    const reportsCollection = this.afs.collection('reports', ref => ref.orderBy('createdAt'));
     return reportsCollection.valueChanges();
   }
 

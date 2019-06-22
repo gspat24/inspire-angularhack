@@ -17,22 +17,12 @@ export class ListComponent implements OnInit {
   ngOnInit() {
     this.fbServ.getReports().subscribe((result) => {
       console.log(result)
-      this.reports = result.sort(this.compare);
+      this.reports = result.reverse();
     });
   }
 
-  compare(a, b) {
-    if (a.createdAt ? new Date(a.createdAt) : '' < b.createdAt ? new Date(b.createdAt) : '') {
-      return -1;
-    }
-    if (a.createdAt ? new Date(a.createdAt) : '' > b.createdAt ? new Date(b.createdAt) : '') {
-      return 1;
-    }
-    return 0;
-  }
-
   toDate(date) {
-    return new Date(date.seconds * 1000)
+    return new Date(date)
   }
 
 }

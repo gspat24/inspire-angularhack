@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
       title: f.value.title,
       location: f.value.location,
       description: f.value.description,
-      createdAt: new Date()
+      createdAt: new Date().getTime()
     }
 
     this.fbServ.setReport(item).then((result) => {
