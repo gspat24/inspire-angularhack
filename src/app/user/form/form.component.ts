@@ -3,13 +3,15 @@ import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
+import { FirebaseService } from '../../services/firebase.service'
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  constructor() { }
+  constructor(private fbServ: FirebaseService) { }
 
   report = {
     title: '',
@@ -39,8 +41,18 @@ export class FormComponent implements OnInit {
       });
     }
 
-    console.log(f.value)
+    const item = {
+      title: f.value.title,
+      location: f.value.location,
+      description: f.value.description,
+      createdAt: new Date()
+    }
 
+    this.fbServ.setReport(item).then((result) => {
+      console.log('RESULT: ', result)
+    })
+
+    this.reportForm.reset()
   }
 
 }

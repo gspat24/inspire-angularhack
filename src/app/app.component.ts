@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 // Services
 import { FirebaseService } from '../app/services/firebase.service'
+import { StorageService } from './services/storageServive';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,24 @@ import { FirebaseService } from '../app/services/firebase.service'
 export class AppComponent implements OnInit, OnChanges {
   title = 'inspire-angularhack';
   role;
+  storageService;
 
   constructor(private fbServ: FirebaseService, private router: Router) {
+    this.storageService = StorageService;
+    this.role = localStorage.getItem('role')
   }
 
   async ngOnInit() {
     console.log('ONINIT')
-    this.role = localStorage.getItem("role");
+    if (this.role === 'user') {
+      this.router.navigate(['/user'])
+    } else if (this.role === 'police') {
+      this.router.navigate(['/police'])
+    }
+    this.storageService.watchStorage().subscribe((data: string) => {
+      console.log(data)
+      this.role = data;
+    })
 
 
     if (!this.role) {
@@ -45,8 +57,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   logout() {
-    this.role = "";
-    localStorage.removeItem('role');
+    this.storageService.removeItem('role');
     this.router.navigate(['/'])
   }
 }

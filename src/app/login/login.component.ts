@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StorageService } from '../services/storageServive';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,10 @@ export class LoginComponent implements OnInit {
     password: ''
   };
   loginForm: FormGroup;
+  storageService;
 
   ngOnInit() {
+    this.storageService = StorageService;
     this.loginForm = new FormGroup({
       'username': new FormControl(this.user.username, [
         Validators.required,
@@ -40,10 +43,10 @@ export class LoginComponent implements OnInit {
 
 
     if (f.value.username === 'user' && f.value.password === 'user') {
-      localStorage.setItem('role', 'user');
+      this.storageService.setItem('role', 'user')
       this.router.navigate(['/user'])
     } else if (f.value.username === 'police' && f.value.password === 'police') {
-      localStorage.setItem('role', 'police');
+      this.storageService.setItem('role', 'police')
       this.router.navigate(['/police'])
     }
   }
