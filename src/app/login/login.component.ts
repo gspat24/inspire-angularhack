@@ -40,8 +40,10 @@ export class LoginComponent implements OnInit {
 
 
     if (f.value.username === 'user' && f.value.password === 'user') {
+      localStorage.setItem('role', 'user');
       this.router.navigate(['/user'])
     } else if (f.value.username === 'police' && f.value.password === 'police') {
+      localStorage.setItem('role', 'police');
       this.router.navigate(['/police'])
     }
   }

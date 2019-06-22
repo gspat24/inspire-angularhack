@@ -1,5 +1,22 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo" mdbStickyHeader>
   <mdb-navbar-brand><a class="navbar-brand" href="#">Reporter</a></mdb-navbar-brand>
+  <links *ngIf="role">
+
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon><span class="caret"></span>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" (click)="logout()">Log out</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
 </mdb-navbar>
 
 <div class="container mt-2">
