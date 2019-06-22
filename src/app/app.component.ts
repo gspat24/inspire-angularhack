@@ -15,8 +15,19 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     console.log('ONINIT')
-    this.fbServ.getReports().subscribe((result) => {
-      console.log(result)
-    });
+    // GET REPORTS SAMPLE
+    // this.fbServ.getReports().subscribe((result) => {
+    //   console.log(result)
+    // });
+
+    // SET REPORT SAMPLE
+    // const item = {
+    //   title: 'Nguot',
+    //   location: 'Mandaue',
+    //   description: 'nguot lubot'
+    // }
+    // this.fbServ.setReport(item).then((result) => {
+    //   console.log('RESULT: ', result)
+    // })
   }
 }
