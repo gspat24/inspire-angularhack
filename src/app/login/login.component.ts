@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
 
   handleSubmit(f: NgForm) {
     if (!f.valid) {
+      (<any>Object).values(this.loginForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+
       return console.log("DONT CALL SERVICE")
     }
     console.log("CALL SERVICE")
