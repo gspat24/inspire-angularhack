@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import * as firebase from 'firebase'
 import { Router } from '@angular/router';
 
 // Services
@@ -50,6 +51,15 @@ export class AppComponent implements OnInit, OnChanges {
     // this.fbServ.setReport(item).then((result) => {
     //   console.log('RESULT: ', result)
     // })
+
+    // GENERATE AND REGISTER TOKEN
+    const fcm = firebase.messaging();
+    await fcm.requestPermission();
+    const token = await fcm.getToken();
+    console.log(token);
+    this.fbServ.setToken(token).then((result) => {
+      console.log('TOKEN SET: ', result)
+    })
   }
 
   ngOnChanges(changes) {
