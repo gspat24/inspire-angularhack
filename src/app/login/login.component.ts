@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
       (<any>Object).values(this.loginForm.controls).forEach(control => {
         control.markAsTouched();
       });
+      return;
     }
 
 
